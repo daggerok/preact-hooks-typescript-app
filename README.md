@@ -2,7 +2,7 @@
 
 ## cons related to Preact + TypeScript
 
-* problematic input event handling
+* problematic [input event handling](src/components/app/nav/AddItem.tsx#L27)
 * problematic reducer connected global state with `useContext` and `state + dispatcher` context `Provider`
 
 ## resources
