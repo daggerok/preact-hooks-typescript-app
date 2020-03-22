@@ -1,0 +1,48 @@
+name: GitHub actions workflows
+on: [push]
+jobs:
+  ci:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        nodejs-version: [12]
+    name: preact-hooks-typescript-app with nodejs ${{ matrix.nodejs-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Git clone
+        uses: actions/checkout@v1
+      - name: Install curl
+        run: sudo apt-get install -y curl
+      - name: Setup NodeJS ${{ matrix.nodejs-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.nodejs-version }}
+      - name: Cache npm ${{ matrix.nodejs-version }} deps
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-${{ matrix.os }}-npm-
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.os }}-npm-
+      - name: Install npm apps (wait-port)
+        run: npm install -g wait-port
+      - name: Cache preact-hooks-typescript-app $GITHUB_WORKSPACE/node_modules
+        uses: actions/cache@v1
+        with:
+          path: $GITHUB_WORKSPACE/node_modules
+          key: ${{ runner.os }}-nodejs-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nodejs-
+            ${{ runner.os }}-
+      - name: Build app
+        run: |
+          cd $GITHUB_WORKSPACE && npm i -E
+          cd $GITHUB_WORKSPACE && npm build
+          cd $GITHUB_WORKSPACE && npm start
+          cd $GITHUB_WORKSPACE && npm run logs &
+      - name: Test app
+        run: |
+          wait-port 1234
+          curl 127.0.0.1:1234
+      - name: Stop app
+        run: cd $GITHUB_WORKSPACE && npm stop
