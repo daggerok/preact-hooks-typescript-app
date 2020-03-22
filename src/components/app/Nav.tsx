@@ -1,7 +1,7 @@
 import * as React from 'preact/compat';
 import { JSXInternal } from 'preact/src/jsx';
 import * as Preact from 'preact';
-import { AddItem } from './AddItem';
+import { AddItem } from './nav/AddItem';
 
 const h = Preact.h;
 

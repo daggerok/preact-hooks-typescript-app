@@ -5,13 +5,12 @@ import * as Preact from 'preact';
 const h = Preact.h;
 
 const styles = {
-  row: { /* ... */ },
-  item: {
+  h2: {
     fontWeight: 300,
+    textAlign: 'center',
+    margin: 0,
   },
 }
 
 export const Row = (item: Item): JSXInternal.Element =>
-  <div style={styles.row}>
-    <h2 style={styles.item}>{item.value}</h2>
-  </div>
+  <h2 style={styles.h2}>{item.value}</h2>

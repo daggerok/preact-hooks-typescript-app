@@ -4,16 +4,12 @@ import * as React from 'preact/compat';
 import { useReducer } from 'preact/hooks';
 import { JSXInternal } from 'preact/src/jsx';
 import { reducer, initialState, Item, actions, ActionTypes } from '../store/reducer';
+import { Nav } from './app/Nav';
 import { Row } from './app/Row';
-import { Nav } from './app/nav/Nav';
 
 type Element = JSXInternal.Element;
 
 const styles = {
-  ul: {
-    listStyle: 'none',
-    paddingLeft: 0,
-  },
   appContainer: {
     padding: '1rem',
   },
@@ -25,17 +21,14 @@ export function App(): Element {
 
   return <Preact.Fragment>
     <Nav dispatch={dispatch} />
-    <div className='app-container' style={styles.appContainer}>
-      <ul
-        onClick={reverse}
-        style={styles.ul}
-      >
-        {state.items.map((item: Item, index: number) =>
-          <li key={index}>
-            <Row {...item} />
-          </li>
-        )}
-      </ul>
+    <div
+      onClick={reverse}
+      className='app-container'
+      style={styles.appContainer}
+    >
+      {state.items.map((item: Item, index: number) =>
+        <Row {...item} />
+      )}
     </div>
   </Preact.Fragment>
 }
