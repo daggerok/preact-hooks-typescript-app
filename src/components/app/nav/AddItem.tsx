@@ -2,10 +2,19 @@ import * as React from 'preact/compat';
 import { JSXInternal } from 'preact/src/jsx';
 import * as Preact from 'preact';
 import { useState } from 'preact/hooks';
-import { actions, ActionTypes } from '../../store/reducer';
+import { actions, ActionTypes } from '../../../store/reducer';
 const h = Preact.h;
 
-const styles = { /* ... */ };
+const styles = {
+  input: {
+    display: 'inline',
+    margin: '1.4rem 0 1.4rem 1rem',
+    fontSize: '1rem',
+  },
+  label: {
+    padding: '1.7rem 0 0 1.7rem',
+  },
+};
 
 interface KeyboardEvent {
   target: HTMLInputElement,
@@ -25,10 +34,10 @@ export function AddItem({ dispatch }): JSXInternal.Element {
 
   return (
     <Preact.Fragment>
-      <label>add new item: </label>
       <input
         type='text'
         value={current}
+        style={styles.input}
         onKeyPress={onKeyPress}
       />
     </Preact.Fragment>
