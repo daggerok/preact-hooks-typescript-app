@@ -5,6 +5,11 @@
 * problematic [input event handling](src/components/app/nav/AddItem.tsx#L27)
 * problematic reducer connected global state with `useContext` and `state + dispatcher` context `Provider`
 
+## other repos
+
+* [GitHub: daggerok/react-hooks-typescript-app](https://github.com/daggerok/react-hooks-typescript-app)
+* [GitHub: daggerok/parcel-examples](https://github.com/daggerok/parcel-examples)
+
 ## resources
 
 * https://dominicstpierre.com/how-to-start-with-typescript-and-preact-a9ea3e0ba4dc
